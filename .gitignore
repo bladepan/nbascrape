@@ -16,3 +16,9 @@ libscrape/config/constants.py.bak
 libscrape/config/config.py.bak
 
 libscrape/config/db.py
+
+batchGen.sh
+
+extract.log
+
+node_modules

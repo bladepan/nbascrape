@@ -233,16 +233,17 @@ class PlayerCbsSports:
             full_name           = row[2].replace('&nbsp;',' ').strip()
             first_name          = full_name.split(' ')[0]
             last_name           = ' '.join(full_name.split(' ')[1:])
-            jersey_number       = row[3]
+            jersey_number       = row[3] if row[3] != '' else 'null'
             cbs_team_code       = row[0]
             position            = row[4]
+            
 
             if cbssports_player_id:
                 self.db.query("""
                     INSERT INTO player_cbssports_by_game
                     (game_id, cbssports_player_id, full_name, first_name, last_name, cbs_team_code, jersey_number, position)
                     VALUES
-                    (%s,"%s", "%s", "%s", "%s", "%s", "%s", "%s")
+                    (%s,"%s", "%s", "%s", "%s", "%s", %s, "%s")
                 """ % (self.gamedata['id'], cbssports_player_id, full_name, first_name, last_name, cbs_team_code, jersey_number, position))
 
                 result = self.db.query("SELECT * FROM player_cbssports WHERE cbssports_player_id = '%s'" % (cbssports_player_id))
